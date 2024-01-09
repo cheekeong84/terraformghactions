@@ -5,6 +5,11 @@ on:
 
 name: On Release Main
 
+permissions:
+      id-token: write
+      contents: read
+      issues: write
+
 jobs:
   terraform:
     name: 'Terraform'
