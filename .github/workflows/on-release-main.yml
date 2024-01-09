@@ -22,6 +22,14 @@ jobs:
         working-directory: ./terraform
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
       - name: 'Require approval'
         uses: trstringer/manual-approval@v1
         with:
@@ -31,14 +39,6 @@ jobs:
           issue-title: "Deploying POC GitHub actions"
           issue-body: "Please approve or deny this POC deployment."
           exclude-workflow-initiator-as-approver: false
-    
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform fmt
         id: fmt
